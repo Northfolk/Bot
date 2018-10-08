@@ -1,0 +1,73 @@
+<style>
+body {
+    margin:0;
+    padding:0;
+    font-size: 14px;
+}
+#container {
+    width:400px;
+    height:200px;
+    margin:0 auto;
+    overflow:visible;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-225px;
+    margin-top:-100px;
+}
+.main {
+    height:100%;
+}
+.main_in_main {
+    height:100%;
+}
+.content {
+    padding-top:0px;
+    height:200px;
+}
+</style>
+
+<div id="container">
+    <div class="main">
+        <div class="main_in_main">
+            <fieldset>
+                <legend>Окно авторизации</legend>
+                {% block content %}
+
+                {% if form.errors %}
+                <p>Логин и пароль не совпадают - попробуйте снова</p>
+                {% endif %}
+
+                {% if next %}
+                {% if user.is_authenticated %}
+                <p>У Вас нет доступа к этой странице.</p>
+                {% else %}
+                <p>Пожалуйста, войдите в свой аккаунт</p>
+                {% endif %}
+                {% endif %}
+
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div>
+                        <td>{{ form.username.label_tag }}</td>
+                        <td>{{ form.username }}</td>
+                    </div>
+
+                    <div>
+                        <td>{{ form.password.label_tag }}</td>
+                        <td>{{ form.password }}</td>
+                    </div>
+
+                    <div>
+                        <input type="submit" value="login" />
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </div>
+                </form>
+
+                <p><a href="{% url 'password_reset' %}">Потеряли пароль?</a></p>
+
+                {% endblock %}
+            </fieldset>
+        </div>
+    </div>
+</div>

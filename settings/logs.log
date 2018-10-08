@@ -1,0 +1,7 @@
+2018-10-08 17:28:20,544 INI file found. Loading settings.
+2018-10-08 17:28:20,547 PyNaCl is not installed, voice will NOT be supported
+2018-10-08 17:28:20,547 logging in using static token
+2018-10-08 17:28:21,645 Created websocket connected to wss://gateway.discord.gg?encoding=json&v=6
+2018-10-08 17:28:21,646 sent the identify payload to create the websocket
+2018-10-08 17:28:28,444 Logged in as:
+Name: Folk-o-matic; Id: 427834426475544576

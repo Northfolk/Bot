@@ -1,0 +1,63 @@
+<style>
+body {
+    margin:0;
+    padding:0;
+    font-size: 14px;
+}
+#container {
+    width:400px;
+    height:200px;
+    margin:0 auto;
+    overflow:visible;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-225px;
+    margin-top:-100px;
+}
+.main {
+    height:100%;
+}
+.main_in_main {
+    height:100%;
+}
+.content {
+    padding-top:0px;
+    height:200px;
+}
+</style>
+<div id="container">
+    <div class="main">
+        <div class="main_in_main">
+            <fieldset>
+                <legend>Основные настройки бота</legend>
+                <!-- Settings info -->
+                <div class="info-group">
+                    <dl>
+                        {% for setup in object_list %}
+                        <dt><b>Bot token:</b> {{ setup.bot_token }}</dt>
+                        <dt><b>Cosplay channel id:</b> {{ setup.cosplay_ch }}</dt>
+                        <dt><b>ESO news channel id:</b> {{ setup.eso_news_ch }}</dt>
+                        <dt><b>ESO server status channel id:</b> {{ setup.eso_status_ch }}</dt>
+                        <dt><b>ESO server status message id:</b> {{ setup.eso_status_msg }}</dt>
+                        <dt><b>Delay between checks:</b> {{ setup.delay }}</dt>
+                        {% empty %}
+                        <b>No settings.</b>
+                        {% endfor %}
+                    </dl>
+                </div>
+
+                <!-- Cmd button -->
+                <div class="control-group">
+                    <label class="control-label">Управление:</label>
+                    <div class="controls">
+                         <form action= '{% url "run" %}' method="POST">
+                             {% csrf_token %}
+                             <input type="submit" value="Пуск" id="toggle" />
+                         </form>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
